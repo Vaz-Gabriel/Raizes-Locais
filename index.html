@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Raízes Locais | A Arte de Viradouro</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Navbar Flutuante -->
+    <header class="glass-header">
+        <div class="wrap nav-container">
+            <a href="#" class="logo" onclick="showView('home')">
+                <span class="logo-icon">🏺</span>
+                <span class="logo-text">RAÍZES LOCAIS<br><small>VIRADOURO - SP</small></span>
+            </a>
+            
+            <button class="menu-btn" id="mobileMenuBtn" aria-label="Abrir Menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+
+            <nav class="main-nav" id="navMenu">
+                <a href="#" class="nav-item" onclick="showView('home')">A Essência</a>
+                <a href="#" class="nav-item" onclick="showView('catalog')">Acervo Exclusivo</a>
+                <a href="#" class="nav-item" onclick="showView('about')">O Projeto ODS</a>
+                
+                <button class="nav-cart-btn" onclick="openCart()">
+                    <span class="cart-icon">🧺</span>
+                    <span>Sacola</span>
+                    <span id="cartCount" class="cart-badge">0</span>
+                </button>
+
+                <div class="nav-separator"></div>
+                <span id="userGreeting" class="user-greeting"></span>
+                <button id="btnNavAtelie" class="btn-solid-small hidden" onclick="showView('dashboard')">Meu Ateliê</button>
+                <button id="loginBtn" class="btn-outline-small" onclick="showView('auth')">Entrar na Feira</button>
+                <button id="logoutBtn" class="btn-ghost-small hidden">Sair</button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- ================= HOME ================= -->
+        <div id="view-home" class="view-section active">
+            <section class="hero-split">
+                <div class="hero-text-side reveal">
+                    <div class="badge-viradouro">
+                        <span class="dot"></span> Nascido em Viradouro, SP
+                    </div>
+                    <h1 class="hero-title">Onde a terra ganha <span>Forma</span> e a palha ganha <span>Alma</span>.</h1>
+                    <p class="hero-desc">Uma vitrine digital de alto padrão dedicada exclusivamente aos mestres artesãos do nosso interior. Celebre a economia criativa, apoie o comércio local e leve para casa uma peça única.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-solid-large" onclick="showView('catalog')">Explorar as Obras</button>
+                        <button class="btn-text-large" onclick="showView('about')">Conheça o Propósito &rarr;</button>
+                    </div>
+                </div>
+                <div class="hero-image-side reveal delay-1">
+                    <div class="image-wrapper main-img">
+                        <img src="img/logo.jpg" alt="Mãos na argila em Viradouro" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=80'">
+                    </div>
+                    <div class="image-wrapper floating-img">
+                        <img src="img/hero-detail.jpg" alt="Detalhe do tear" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&w=400&q=80'">
+                    </div>
+                </div>
+            </section>
+
+            <div class="marquee-container reveal">
+                <div class="marquee-content">
+                    <span>✧ VALORIZANDO A CULTURA CAIPIRA</span>
+                    <span>✧ APOIO DIRETO AO ARTESÃO</span>
+                    <span>✧ ODS 8 ONU</span>
+                    <span>✧ FEITO À MÃO EM VIRADOURO</span>
+                    <span>✧ ARTE POPULAR PAULISTA</span>
+                    <span>✧ VALORIZANDO A CULTURA CAIPIRA</span>
+                    <span>✧ APOIO DIRETO AO ARTESÃO</span>
+                    <span>✧ ODS 8 ONU</span>
+                </div>
+            </div>
+
+            <section class="manifesto-section wrap reveal">
+                <div class="manifesto-box glass-panel">
+                    <h2 class="section-title text-center">Nossas Raízes</h2>
+                    <p class="text-center lead-text">Entre os canaviais e o céu aberto do interior de São Paulo, Viradouro guarda tesouros criados por mãos calejadas e corações apaixonados.</p>
+                    <div class="features-grid mt-3">
+                        <div class="feature-card">
+                            <div class="icon-circle">🧶</div>
+                            <h3>Tradição</h3>
+                            <p>Técnicas passadas de geração em geração, mantendo viva a história da nossa gente.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="icon-circle">🤝</div>
+                            <h3>Comércio Justo</h3>
+                            <p>Sem intermediários. O valor integral das obras apoia a economia dos nossos bairros.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="icon-circle">🌱</div>
+                            <h3>Sustentabilidade</h3>
+                            <p>Matérias-primas colhidas de forma orgânica, com reaproveitamento de troncos e fibras.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= CATALOGO ================= -->
+        <div id="view-catalog" class="view-section hidden wrap" style="padding-top: 120px;">
+            <div class="catalog-header reveal text-center">
+                <h2 class="section-title">Acervo de Obras</h2>
+                <p class="lead-text">Filtre por matéria-prima e descubra a riqueza dos nossos ateliês.</p>
+                
+                <div class="advanced-search mt-2">
+                    <input type="search" id="searchInput" class="search-input" placeholder="Buscar por obra, artista ou bairro (ex: Centro)...">
+                </div>
+                
+                <div id="categoryChips" class="filter-chips mt-2"></div>
+            </div>
+            
+            <div id="catalogGrid" class="masonry-grid reveal delay-1 mt-3"></div>
+        </div>
+
+        <!-- ================= ABOUT ================= -->
+        <div id="view-about" class="view-section hidden wrap" style="padding-top: 120px; padding-bottom: 80px;">
+            <div class="about-complex-layout reveal">
+                <div class="about-text">
+                    <h2 class="section-title">O Projeto Acadêmico</h2>
+                    <p class="lead-text highlight-terra">Desenvolvimento Tecnológico e Inclusão Social em Viradouro.</p>
+                    <p>O <strong>Raízes Locais</strong> é um Projeto de Extensão II (Sistemas de Informação) que aplica soluções de TI para mitigar a exclusão digital de artesãos e mestres da cultura popular.</p>
+                    <p>A plataforma atua como uma ponte direta entre a comunidade consumidora e o artesão, implementando checkout integrado, catálogo dinâmico e gestão descentralizada do estoque.</p>
+                    
+                    <div class="ods-card mt-2">
+                        <div class="ods-icon">8</div>
+                        <div class="ods-text">
+                            <h4>Alinhamento ONU - ODS 8</h4>
+                            <p>Trabalho Decente e Crescimento Econômico. Promovendo a inclusão produtiva e a valorização cultural regional.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="img/projeto.jpg" alt="Estruturação do Projeto" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80'" class="styled-img">
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= AUTENTICAÇÃO ================= -->
+        <div id="view-auth" class="view-section hidden wrap" style="padding-top: 120px; min-height: 80vh; display:flex; align-items:center; justify-content:center;">
+            <div class="auth-wrapper glass-panel reveal">
+                <div class="auth-header text-center">
+                    <h2 class="section-title" id="authTitle" style="font-size: 2rem;">Acesso à Feira</h2>
+                </div>
+                
+                <div class="auth-switch">
+                    <button id="tabLogin" class="switch-btn active" type="button">Já tenho conta</button>
+                    <button id="tabRegister" class="switch-btn" type="button">Sou novo aqui</button>
+                </div>
+
+                <form id="authForm" class="auth-form mt-2">
+                    <div class="form-group">
+                        <label>E-mail de Acesso</label>
+                        <input type="email" id="email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Senha Segura</label>
+                        <input type="password" id="password" minlength="6" required placeholder="Mínimo 6 caracteres">
+                    </div>
+
+                    <div id="registerFields" class="hidden slide-down">
+                        <div class="form-group">
+                            <label>Nome Completo ou Nome do Ateliê</label>
+                            <input type="text" id="name" placeholder="Ex: Ateliê Fios de Viradouro">
+                        </div>
+                        <div class="form-group">
+                            <label>Qual o seu perfil?</label>
+                            <div class="custom-select">
+                                <select id="role">
+                                    <option value="buyer">Quero Apenas Comprar (Cliente)</option>
+                                    <option value="artisan">Sou Artesão (Quero Expor)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group w-50">
+                                <label>Bairro / Cidade</label>
+                                <input type="text" id="city" placeholder="Ex: Centro - Viradouro/SP">
+                            </div>
+                            <div class="form-group w-50">
+                                <label>WhatsApp</label>
+                                <input type="text" id="contact" placeholder="(17) 99999-9999">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="authSubmitBtn" class="btn-solid-large w-100 mt-2">Confirmar Acesso</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= DASHBOARD DO ARTESÃO ================= -->
+        <div id="view-dashboard" class="view-section hidden wrap" style="padding-top: 120px;">
+            <div class="dashboard-header reveal">
+                <div>
+                    <h2 class="section-title">Painel do Artista</h2>
+                    <p class="lead-text">Administre seu acervo digital em Viradouro.</p>
+                </div>
+                <div class="stats-cards">
+                    <div class="stat-card glass-panel">
+                        <span class="stat-value" id="repViews">0</span>
+                        <span class="stat-name">Visitas à Loja</span>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <span class="stat-value highlight-terra" id="repSales">0</span>
+                        <span class="stat-name">Pedidos Recebidos</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-content mt-3 reveal delay-1">
+                <div class="dashboard-form-side glass-panel">
+                    <h3>Expor Nova Peça</h3>
+                    <form id="productForm" class="mt-2">
+                        <div class="form-group">
+                            <label>Título da Obra</label>
+                            <input type="text" id="prodTitle" maxlength="80" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group w-50">
+                                <label>Valor Justo (R$)</label>
+                                <input type="number" id="prodPrice" step="0.01" min="0" required placeholder="0.00">
+                            </div>
+                            <div class="form-group w-50">
+                                <label>Matéria-Prima</label>
+                                <select id="prodCategory" class="custom-select"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>História da Peça / Detalhes</label>
+                            <textarea id="prodDesc" maxlength="500" required rows="4"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Fotografia da Obra</label>
+                            <div class="advanced-file-upload">
+                                <input type="file" id="prodImageFile" accept=".jpg, .jpeg, .png" required>
+                                <div class="upload-placeholder">
+                                    <span class="upload-icon">📷</span>
+                                    <span>Clique para anexar (.jpg, .png da pasta img)</span>
+                                </div>
+                                <img id="imagePreview" src="" alt="Preview" class="hidden">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-solid-large w-100 mt-2">Publicar no Catálogo</button>
+                    </form>
+                </div>
+
+                <div class="dashboard-list-side">
+                    <h3>Suas Obras na Vitrine</h3>
+                    <div id="myProducts" class="my-works-grid mt-2"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ================= PAINEL LATERAL / DRAWER DO CARRINHO ================= -->
+    <div id="cartDrawerOverlay" class="cart-overlay hidden" onclick="closeCart()">
+        <aside class="cart-drawer" onclick="event.stopPropagation()">
+            <div class="cart-header">
+                <div class="cart-title-wrapper">
+                    <span class="cart-title-icon">🧺</span>
+                    <h3>Sua Sacola de Arte</h3>
+                </div>
+                <button class="cart-close-btn" onclick="closeCart()">&times;</button>
+            </div>
+
+            <div id="cartItemsList" class="cart-items-container"></div>
+
+            <div id="cartCheckoutSection" class="cart-checkout-section hidden">
+                <div class="cart-divider"></div>
+                <h4 class="checkout-subtitle">1. Endereço de Entrega (Viradouro e Região)</h4>
+                
+                <form id="checkoutForm" onsubmit="processCheckout(event)">
+                    <div class="form-row">
+                        <div class="form-group w-100">
+                            <label>Seu Nome Completo</label>
+                            <input type="text" id="orderBuyerName" required placeholder="Ex: Ana Silva">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group w-50">
+                            <label>WhatsApp / Telefone</label>
+                            <input type="text" id="orderBuyerPhone" required placeholder="(17) 99999-9999">
+                        </div>
+                        <div class="form-group w-50">
+                            <label>CEP</label>
+                            <input type="text" id="orderBuyerCep" placeholder="14740-000" value="14740-000">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group w-100">
+                            <label>Rua e Número</label>
+                            <input type="text" id="orderBuyerAddress" required placeholder="Ex: Rua do Comércio, 340">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group w-50">
+                            <label>Bairro</label>
+                            <input type="text" id="orderBuyerDistrict" required placeholder="Ex: Centro, Santo Antônio...">
+                        </div>
+                        <div class="form-group w-50">
+                            <label>Cidade</label>
+                            <input type="text" id="orderBuyerCity" value="Viradouro - SP" readonly>
+                        </div>
+                    </div>
+
+                    <div class="cart-divider"></div>
+                    <h4 class="checkout-subtitle">2. Forma de Pagamento</h4>
+                    
+                    <div class="payment-methods-grid">
+                        <label class="payment-card active" onclick="selectPaymentMethod('pix', this)">
+                            <input type="radio" name="paymentMethod" value="pix" checked>
+                            <span class="pay-icon">⚡</span>
+                            <div class="pay-info">
+                                <strong>PIX Imediato</strong>
+                                <small>Aprovação instantânea</small>
+                            </div>
+                        </label>
+
+                        <label class="payment-card" onclick="selectPaymentMethod('card', this)">
+                            <input type="radio" name="paymentMethod" value="card">
+                            <span class="pay-icon">💳</span>
+                            <div class="pay-info">
+                                <strong>Cartão de Crédito</strong>
+                                <small>Até 3x sem juros</small>
+                            </div>
+                        </label>
+
+                        <label class="payment-card" onclick="selectPaymentMethod('cash', this)">
+                            <input type="radio" name="paymentMethod" value="cash">
+                            <span class="pay-icon">🤝</span>
+                            <div class="pay-info">
+                                <strong>Pagar na Retirada</strong>
+                                <small>Direto com o artesão</small>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div id="cardFieldsContainer" class="card-inputs-box hidden slide-down">
+                        <div class="form-group">
+                            <label>Número do Cartão</label>
+                            <input type="text" placeholder="0000 0000 0000 0000" maxlength="19">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group w-50">
+                                <label>Validade</label>
+                                <input type="text" placeholder="MM/AA" maxlength="5">
+                            </div>
+                            <div class="form-group w-50">
+                                <label>CVV</label>
+                                <input type="text" placeholder="123" maxlength="4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart-summary-box">
+                        <div class="summary-line">
+                            <span>Subtotal:</span>
+                            <strong id="cartSubtotalText">R$ 0,00</strong>
+                        </div>
+                        <div class="summary-line">
+                            <span>Entrega em Viradouro:</span>
+                            <strong class="highlight-green">Grátis (Apoio Local)</strong>
+                        </div>
+                        <div class="summary-line total-line">
+                            <span>Total a Pagar:</span>
+                            <strong id="cartTotalText">R$ 0,00</strong>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btnFinishOrder" class="btn-solid-large w-100 mt-2">
+                        <span id="btnFinishText">Confirmar e Finalizar Compra</span>
+                        <div id="btnFinishSpinner" class="spinner hidden"></div>
+                    </button>
+                </form>
+            </div>
+        </aside>
+    </div>
+
+    <!-- ================= MODAL DE SUCESSO ================= -->
+    <div id="successModalOverlay" class="success-modal-overlay hidden">
+        <div class="success-modal-card">
+            <div class="success-badge-icon">✓</div>
+            <span class="selo-viradouro">Comprovante de Compra</span>
+            <h2 class="success-title">Pagamento Aprovado!</h2>
+            <p class="success-desc">Parabéns! Sua compra foi confirmada com sucesso. Você está fortalecendo o trabalho artesanal de Viradouro.</p>
+
+            <div class="order-receipt-box">
+                <div class="receipt-header">
+                    <span>Código do Pedido:</span>
+                    <strong id="receiptOrderId">#VRD-2026-0001</strong>
+                </div>
+                <div class="receipt-divider"></div>
+                <div class="receipt-row">
+                    <span>Destinatário:</span>
+                    <strong id="receiptBuyerName">--</strong>
+                </div>
+                <div class="receipt-row">
+                    <span>Endereço de Entrega:</span>
+                    <strong id="receiptBuyerAddress">--</strong>
+                </div>
+                <div class="receipt-row">
+                    <span>Forma de Pagamento:</span>
+                    <strong id="receiptPaymentMethod">PIX Aprovado</strong>
+                </div>
+                <div class="receipt-divider"></div>
+                <div class="receipt-items-summary" id="receiptItemsSummary"></div>
+                <div class="receipt-divider"></div>
+                <div class="receipt-total-row">
+                    <span>Total Pago:</span>
+                    <strong id="receiptTotalValue">R$ 0,00</strong>
+                </div>
+            </div>
+
+            <div class="success-actions mt-3">
+                <button class="btn-solid-large w-100" onclick="closeSuccessModal()">Continuar Explorando o Acervo</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="toast-area"></div>
+
+    <footer class="complex-footer mt-4">
+        <div class="wrap footer-grid">
+            <div class="footer-brand">
+                <h2>RAÍZES LOCAIS</h2>
+                <p>Preservando a identidade caipira, o talento das mãos paulistas e a cultura de Viradouro.</p>
+            </div>
+            <div class="footer-links">
+                <h4>O Projeto</h4>
+                <p>Trabalho Universitário de Extensão II</p>
+                <p>Alinhamento ODS 8 - ONU</p>
+                <p>Desenvolvido em Sistemas de Informação</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Localização</h4>
+                <p>📍 Viradouro - Estado de São Paulo</p>
+                <p>Orgulho do Interior Paulista.</p>
+            </div>
+        </div>
+        <div class="footer-bottom wrap">
+            <p>&copy; 2026 Raízes Locais. Todos os direitos reservados aos artesãos.</p>
+        </div>
+    </footer>
+    
+    <script src="app.js"></script>
+</body>
+</html>
