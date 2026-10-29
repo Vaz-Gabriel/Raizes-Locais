@@ -18,7 +18,7 @@ const MOCK_PRODUCTS = [
         price: 185.00,
         image_url: 'img/bilha.jpg',
         description: 'Peça moldada no torno com argila regional. Mantém a água fresca, tradição pura do interior paulista.',
-        profiles: { name: 'Mestre Oleiro João', city: 'Bairro Santo Antônio - Viradouro/SP' }
+        profiles: { name: 'Mestre Oleiro João', city: 'Bairro Santo Antônio - Bebedouro/SP' }
     },
     {
         id: 9902,
@@ -27,7 +27,7 @@ const MOCK_PRODUCTS = [
         price: 340.00,
         image_url: 'img/manta.jpg',
         description: 'Tecida à mão fio a fio durante 15 dias. Cores que refletem o fim de tarde nos canaviais da região.',
-        profiles: { name: 'Dona Maria Tecelã', city: 'Centro - Viradouro/SP' }
+        profiles: { name: 'Dona Maria Tecelã', city: 'Centro - Bebedouro/SP' }
     },
     {
         id: 9903,
@@ -36,7 +36,7 @@ const MOCK_PRODUCTS = [
         price: 210.00,
         image_url: 'img/escultura.jpg',
         description: 'Esculpido em madeira de reaproveitamento de podas. Pintura com pigmentos de terra.',
-        profiles: { name: 'Ateliê Raízes de Madeira', city: 'Vila Nova - Viradouro/SP' }
+        profiles: { name: 'Ateliê Raízes de Madeira', city: 'Vila Nova - Bebedouro/SP' }
     },
     {
         id: 9904,
@@ -45,7 +45,7 @@ const MOCK_PRODUCTS = [
         price: 550.00,
         image_url: 'img/quadro.jpg',
         description: 'Óleo sobre tela capturando a luz do sol e o movimento das plantações de cana-de-açúcar.',
-        profiles: { name: 'Galeria Caipira', city: 'Bairro Primavera - Viradouro/SP' }
+        profiles: { name: 'Galeria Caipira', city: 'Bairro Primavera - Bebedouro/SP' }
     },
     {
         id: 9905,
@@ -54,7 +54,7 @@ const MOCK_PRODUCTS = [
         price: 120.00,
         image_url: 'img/cesto.jpg',
         description: 'Cesto estruturado através do trançado da palha de milho desidratada ao sol.',
-        profiles: { name: 'Trançadeiras Unidas', city: 'Sítio Boa Vista - Viradouro/SP' }
+        profiles: { name: 'Trançadeiras Unidas', city: 'Sítio Boa Vista - Bebedouro/SP' }
     },
     {
         id: 9906,
@@ -63,7 +63,7 @@ const MOCK_PRODUCTS = [
         price: 850.00,
         image_url: 'img/mesa.jpg',
         description: 'Mesa de centro aproveitando as formas orgânicas de raiz tombada naturalmente.',
-        profiles: { name: 'Marcenaria do Zé', city: 'Distrito Rural - Viradouro/SP' }
+        profiles: { name: 'Marcenaria do Zé', city: 'Distrito Rural - BebedouroSP' }
     }
 ];
 
@@ -218,7 +218,7 @@ function renderChips() {
 window.filterCat = (c) => { activeCat = c; renderChips(); renderCatalog(); };
 
 async function loadCatalog() {
-    $('catalogGrid').innerHTML = '<p class="text-center w-100">A carregar acervo de Viradouro...</p>';
+    $('catalogGrid').innerHTML = '<p class="text-center w-100">A carregar acervo de Bebedouro...</p>';
     
     let dbData = [];
     try {
@@ -353,7 +353,7 @@ function renderCartItems() {
             <div class="cart-empty-state">
                 <span class="cart-empty-icon">🧺</span>
                 <h4>Sua sacola está vazia</h4>
-                <p class="lead-text" style="font-size: 0.95rem;">Adicione peças exclusivas feitas pelos mestres de Viradouro para prosseguir.</p>
+                <p class="lead-text" style="font-size: 0.95rem;">Adicione peças exclusivas feitas pelos mestres de Bebedouro para prosseguir.</p>
                 <button class="btn-solid-small mt-2" onclick="closeCart(); showView('catalog');">Ir às Compras</button>
             </div>
         `;
@@ -417,7 +417,7 @@ async function processCheckout(e) {
     const buyerDistrict = $('orderBuyerDistrict').value.trim();
 
     if (!buyerName || !buyerAddress || !buyerDistrict) {
-        showToast('Por favor, preencha o endereço completo de Viradouro.', 'error');
+        showToast('Por favor, preencha o endereço completo de Bebedouro.', 'error');
         return;
     }
 
@@ -450,7 +450,7 @@ async function processCheckout(e) {
         showPaymentSuccessModal({
             orderId,
             buyerName,
-            address: `${buyerAddress}, ${buyerDistrict} - Viradouro/SP`,
+            address: `${buyerAddress}, ${buyerDistrict} - Bebedouro/SP`,
             paymentMethod: selectedMethod.toUpperCase(),
             total,
             items: [...cart]
