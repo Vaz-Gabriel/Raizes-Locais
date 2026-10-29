@@ -118,8 +118,8 @@ button, .btn-solid-large, .btn-solid-small, .btn-outline-large, .btn-outline-sma
 /* --- HERO SECTION --- */
 .hero-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; padding: 120px 5% 0 10%; align-items: center; gap: 4rem; position: relative; }
 .hero-text-side { max-width: 600px; z-index: 2; }
-.badge-viradouro { display: inline-flex; align-items: center; gap: 8px; background: rgba(138, 75, 38, 0.1); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; color: var(--terra-main); margin-bottom: 2rem; border: 1px solid rgba(138, 75, 38, 0.2); }
-.badge-viradouro .dot { width: 8px; height: 8px; background: var(--terra-main); border-radius: 50%; animation: pulse 2s infinite; }
+.badge-bebedouro { display: inline-flex; align-items: center; gap: 8px; background: rgba(138, 75, 38, 0.1); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; color: var(--terra-main); margin-bottom: 2rem; border: 1px solid rgba(138, 75, 38, 0.2); }
+.badge-bebedouro .dot { width: 8px; height: 8px; background: var(--terra-main); border-radius: 50%; animation: pulse 2s infinite; }
 @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(138, 75, 38, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(138, 75, 38, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(138, 75, 38, 0); } }
 .hero-title { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; }
 .hero-title span { font-style: italic; color: var(--terra-main); font-weight: 400; }
@@ -464,7 +464,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--terra-main); }
     to { transform: scale(1); opacity: 1; }
 }
 
-.selo-viradouro {
+.selo-bebedouro {
     background: var(--cana-green);
     color: #fff;
     padding: 0.35rem 1rem;
